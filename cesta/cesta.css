@@ -1,0 +1,103 @@
+*{
+  margin:0;
+  padding:0;
+}
+
+h1,h3{
+justify-content: center;
+font-family: 'Mochiy Pop P One', sans-serif;
+
+}
+
+header{
+  padding-left: 15px;
+  padding-right: 15px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fruit{
+  width:150px;
+  display:inline-block;
+  align-items:center;
+
+}
+
+form{
+  margin-left:15%;
+  margin-right:15%;
+  margin-bottom:10px;
+  font-family: 'Patrick Hand', cursive;
+  font-weight: bold;
+  font-size:20px;
+  display:flex;
+  justify-content:center;
+  flex-wrap: wrap;
+  border-left:1px solid green;
+  border-right:1px solid green;
+}
+#cesta a{
+  font-family: 'Patrick Hand', cursive;
+}
+
+footer{
+padding:10px;
+display:flex;
+flex-direction:column;
+justify-content: center;
+align-items: center;
+width:100%;
+}
+*
+h6{
+  text-align: center;
+}
+
+@media screen and (min-width:1503px){
+  footer{
+    position:absolute;
+    bottom:0;
+  }
+}
+
+@media screen and (max-width:435px){
+  header div:first-child{
+    display:none;
+  }
+}
+
+input[type="submit"]{
+  width:100%;
+  margin-top:10px;
+}
+
+ul{
+  margin-left: 30px;
+  margin-top:15px;
+  margin-bottom:15px;
+  list-style: none;
+}
+
+li{
+  text-align:center;
+  font-family:'Patrick Hand', cursive;
+  font-weight:bold;
+  font-size:20px;
+}
+
+p {
+  margin-left:15px;
+  font-family:'Patrick Hand', cursive;
+  font-weight:bold;
+  font-size:25px;
+  margin-right:15px;
+}
+
+#header_form{
+  margin-left:15%;
+  margin-right:15%;
+  margin-top:30px;
+
+}
