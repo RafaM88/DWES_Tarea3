@@ -1,13 +1,15 @@
 <?php
 
 
-/*En esta página, recogemos los artículos añadidos a la cesta
-y creamos una cookie por cada artículo con duración de media hora*/
-
+//Eliminamos las cookies anteriores antes de asignar unas nuevas tras modificar el contenido de la cesta
+if(isset($_COOKIE['fruta'])){
+  setcookie("fruta",$_COOKIE['fruta'],time()-60*60);
+}
 
 if(!isset($_POST['frutas'])){
   header("Location:index.php");
 }
+
 //Asignamos los datos recogidos en el formulario a un array $frutas[]
 for($i=0;$i<count($_POST['frutas']);$i++){
 
@@ -15,17 +17,16 @@ for($i=0;$i<count($_POST['frutas']);$i++){
 
 }
 
-//Eliminamos las cookies anteriores antes de asignar unas nuevas tras modificar el contenido de la cesta
 
-foreach($_COOKIE['frutas'] as $index => $value){
 
-  setcookie("frutas[".$index."]",$frutas[$value],time()-60*30,"/cesta");
-}
-//Creamos las cookies y mostramos al usuario lo que ha añadido a la cesta
 
-foreach($frutas as $index => $value){
-  setcookie("frutas[".$index."]",$value,time()+60*30,"/cesta");
-}
+/*Creamos una sola cookie con un array que contiene todos los artículos.
+Para ello, hacemos uso de la función json_encode*/
+
+
+$obj=json_encode($frutas);
+setcookie("fruta",$obj,time()+60*60);
 
 header("Location:index.php");
+
 ?>

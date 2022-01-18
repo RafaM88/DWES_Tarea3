@@ -1,0 +1,41 @@
+/**{
+  margin:0;
+  padding:0;
+}
+*/
+header{
+  padding-left:16px;
+  padding-right:16px;
+}
+/*
+header > div:first-child{
+  float:left;
+}
+*/
+header h1,header i{
+  font-family: 'DM Serif Display', serif;
+ text-align:center;
+}
+/*
+#logout{
+  float:right;
+  height: inherit;
+}
+*/
+
+footer{
+padding:10px;
+display:flex;
+flex-direction:column;
+justify-content: center;
+align-items: center;
+width:100%;
+}
+
+footer > div:last-child{
+  align-items:center;
+}
+
+footer > div:last-child >div{
+  margin-right:20px;
+}

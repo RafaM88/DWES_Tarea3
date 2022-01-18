@@ -3,6 +3,9 @@
   padding:0;
 }
 
+body{
+  min-width:100vh;
+}
 h1,h3{
 justify-content: center;
 font-family: 'Mochiy Pop P One', sans-serif;
@@ -50,15 +53,15 @@ justify-content: center;
 align-items: center;
 width:100%;
 }
-*
+
 h6{
   text-align: center;
 }
 
 @media screen and (min-width:1503px){
   footer{
-    position:absolute;
-    bottom:0;
+    
+    margin-top:500px;
   }
 }
 

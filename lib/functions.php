@@ -18,7 +18,7 @@
     <!-- Enlaces a fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost&family=Mochiy+Pop+P+One&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost&family=Mochiy+Pop+P+One&family=Patrick+Hand&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
   <!-- Enlace a font-awesome para iconos -->
     <script src="https://kit.fontawesome.com/ad0403babd.js" crossorigin="anonymous"></script>

@@ -1,8 +1,10 @@
 <?php
-if(date(Y)==2022){
+$date=new DateTime();
+$newDate=$date->format('Y');
+if($newDate==2022){
   $year="2022";
 }else{
-  $year="2022 - ".date(Y);
+  $year="2022 - ".$newDate;
 }
 
 ?>
@@ -19,5 +21,5 @@ if(date(Y)==2022){
     </a>
 </p>
 </div>
-<div>
+
 <!-- style="position:relative;left:50%;" -->

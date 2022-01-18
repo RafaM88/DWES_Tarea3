@@ -1,7 +1,7 @@
 <?php
 require_once("../lib/functions.php");
 
-//Indicamos, basándonos en las cookies, los artículos que hay en la cesta
+
 
 
 //Array con frutas y verduras
@@ -11,20 +11,22 @@ require_once("../lib/functions.php");
   "Berenjena","Calabacín","Coliflor","Pepino","Calabaza","Perejil","Mandarina",
   "Mango","Apio","Puerro","Espárragos","Naranja","Frambuesa","Mora");
 
-  //Los ordenamos alfabéticamente por valor
+  //Los ordenamos alfabéticamente por valor. En este caso, nos da igual el índice
   sort($frutas);
 
 
   //Llamada a la cabecera de la página
   cabecera("cesta","Cesta de la compra::Inicio");
 
-  //Recuento de elementos en la cesta
-if(isset($_COOKIE['frutas'])){
+  /*Recuento de elementos en la cesta. Informamos al usuario de los
+  productos cargados en la cesta o indicamos que está vacía*/
+if(isset($_COOKIE['fruta'])){
     ?>
     <p>Has añadido los siguientes productos a la cesta:</p>
     <ul>
       <?php
-      foreach($_COOKIE['frutas'] as $index => $value){
+      $obj=json_decode($_COOKIE['fruta']);
+      foreach($obj as $index => $value){
         ?><li><?=$value;?></li>
         <?php
       }
@@ -43,28 +45,32 @@ if(isset($_COOKIE['frutas'])){
 
 <?php
 
-  //Creamos el formulario con entradas checkbox
+  //Creamos el formulario con entradas checkbox recorriendo el arra $frutas[];
   for($i=0;$i<count($frutas);$i++){
    ?>
-   <div class="fruit">
-   <input class="w3-check" type="checkbox" name="frutas[]" value="<?=($frutas[$i]);?>"
+    <div class="fruit">
+      <input class="w3-check" type="checkbox" name="frutas[]" value="<?=($frutas[$i]);?>"
 
    <?php
+   
    //Si tenemos una fruta almacenada en cookie, la seleccionamos
+    if(isset($obj)){
+      foreach($obj as $index => $value){
+        if($value==$frutas[$i]){
+          echo " checked=\"checked\"";
+        }
 
-   foreach($_COOKIE['frutas'] as $index => $value){
-     if($value==$frutas[$i]){
-       echo " checked=\"checked\"";
-     }
-   }
-   echo "><label>  ".$frutas[$i]."</label></div>";
-}
+      }
+
+    }
+      echo "><label>  ".$frutas[$i]."</label></div>";
+  }
 
     ?>
     <br>
      <input type="Submit" class="w3-button w3-green" value="Añadir a cesta">
    </form>
-  
+
 <?php
    footer("cesta");
 ?>

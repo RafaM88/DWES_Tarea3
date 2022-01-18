@@ -1,0 +1,20 @@
+dHost
+ec2-54-216-159-235.eu-west-1.compute.amazonaws.com
+
+Database
+d1hhkma9j2jr21
+
+User
+ckakxqglmylwvz
+
+Port
+5432
+
+Password
+1288c8817b3460f1ef28e14201a27490bdb07da6a9a01cedc9420a22d809cd5f
+
+URI
+postgres://ckakxqglmylwvz:1288c8817b3460f1ef28e14201a27490bdb07da6a9a01cedc9420a22d809cd5f@ec2-54-216-159-235.eu-west-1.compute.amazonaws.com:5432/d1hhkma9j2jr21
+
+Heroku CLI
+heroku pg:psql postgresql-regular-83149 --app mjre-tarea3
