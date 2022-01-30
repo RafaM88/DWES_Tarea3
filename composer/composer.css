@@ -1,0 +1,47 @@
+h1{
+    text-align:center;
+}
+
+h3{
+    margin-left:5%;
+    margin-right:5%;
+}
+
+p {
+    margin-left:5%;
+    margin-right:5%;
+}
+
+.logo{
+    display:flex;
+   justify-content:center;
+}
+
+figcaption{
+    text-align:center;
+    background-color:rgba(120,120,120,0.5);
+}
+
+
+pre{
+    background-color:black;
+    color:green;
+    margin-left:30%;
+    margin-right:30%;
+    width:40%;
+    padding:15px;
+    font-weight:bold;
+}
+
+span{
+    color:indianred;
+}
+
+pre:hover{
+   color:dodgerblue;
+}
+
+pre:hover span{
+    color:mediumpurple;
+}
+
