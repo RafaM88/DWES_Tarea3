@@ -87,3 +87,5 @@ pues instalará exactamente las mismas dependencias que nos ha instalado a nosot
     $log = new Monolog\Logger('name');
 </pre>
 </code>
+</body>
+<html>

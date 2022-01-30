@@ -20,6 +20,9 @@ if (!isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER']!="admin" || $
     
     <p>Podemos mejorar la autenticación HTTP sustituyéndola por una autenticación<em>hash/digest</em>. Te explico más sobre ella si pulsas en este <a href="../hash/index.php">enlace</a>.
     </p>
+
+</body>
+</html>
    <?php
 }
 ?>
