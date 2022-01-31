@@ -1,4 +1,6 @@
 <?php
+require_once("../lib/functions.php");
+cabecera("http","DWES Tarea 3::Autenticación HTTP");
 if (!isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER']!="admin" || $_SERVER['PHP_AUTH_PW']!="admin"){
     header('WWW-Authenticate: Basic realm="Mi dominio"');
     header('HTTP/1.0 401 Unauthorized');
@@ -6,8 +8,7 @@ if (!isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER']!="admin" || $
     <?php
     exit;
 } else {
-   require_once("../lib/functions.php");
-   cabecera("http","DWES Tarea 3::Autenticación HTTP");
+   
    ?>
     <h1>Autenticación HTTP</h1>
     <h3>¿Por qué no es segura la <b>autenticación HTTP</b>?</h3>
