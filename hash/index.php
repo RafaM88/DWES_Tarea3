@@ -1,9 +1,9 @@
 <?php
-$passwd = "admin";
+$passwd = "admin_hash";
 $hash = password_hash($passwd,PASSWORD_BCRYPT);
 
 
-if (!isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER']!="admin" || !(password_verify($_SERVER['PHP_AUTH_PW'],$hash))){
+if (!isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER']!="admin_hash" || !(password_verify($_SERVER['PHP_AUTH_PW'],$hash))){
     header('WWW-Authenticate: Basic realm="Mi dominio"');
     header('HTTP/1.0 401 Unauthorized');
     ?><img src="img/401.jpg" style="width:100%;">
