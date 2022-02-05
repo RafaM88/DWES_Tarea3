@@ -105,8 +105,8 @@ session_start();
 <label>Concepto</label>
 <input class="w3-input w3-margin-top w3-margin-bottom" maxlength="20" type="text" name="concepto">
 
-<label>Importe</label>
-<input class="w3-input w3-margin-top w3-margin-bottom" type="number" step="any" name="importe">
+<label>Importe (máximo 10.000 €)</label>
+<input class="w3-input w3-margin-top w3-margin-bottom" type="number" min="-10000" max="10000" step="any" name="importe">
 
 <label>Fecha</label>
 <input class="w3-input w3-margin-top w3-margin-bottom" type="date" name="fecha">

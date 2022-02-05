@@ -10,8 +10,11 @@
    $tipo=$_POST['tipo'];
     $concepto=$_POST['concepto'];
     $importe=abs($_POST['importe']);
-
-    echo $importe;
+    
+   
+    if($importe>10000){
+       die(header("Location:index.php?error=7"));
+   }
     
     $usuario=$_SESSION['nombre'];
     
