@@ -9,9 +9,12 @@
 
    $tipo=$_POST['tipo'];
     $concepto=$_POST['concepto'];
-    $importe=$_POST['importe'];
-    $usuario=$_SESSION['nombre'];
+    $importe=abs($_POST['importe']);
 
+    echo $importe;
+    
+    $usuario=$_SESSION['nombre'];
+    
     if(empty($fecha)){
         die(header("Location:index.php?error=2"));
 
@@ -42,4 +45,6 @@ $query->bindParam(5,$concepto);
 $query->execute();
 
 header("Location:resumen.php");
+
+
 ?>

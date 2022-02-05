@@ -92,7 +92,7 @@ ob_start();
     } 
 
     ?>
-    <tr><td colspan="4">SALDO TOTAL:<?php echo $ingresos - $gastos;?></td></tr>
+    <tr><td colspan="4">SALDO TOTAL:<?php echo $ingresos - $gastos." €";?></td></tr>
 </table>
 </body>
 </html>

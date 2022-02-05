@@ -100,10 +100,10 @@ session_start();
   <h2>Introduce un movimiento</h2>
 </div>
 
-<form class="w3-container" method="post" action="movimiento.php">
+<form class="w3-container" method="post" action="movimiento.php" target="_blank">
 
 <label>Concepto</label>
-<input class="w3-input w3-margin-top w3-margin-bottom" maxlenght="20" type="text" name="concepto">
+<input class="w3-input w3-margin-top w3-margin-bottom" maxlength="20" type="text" name="concepto">
 
 <label>Importe</label>
 <input class="w3-input w3-margin-top w3-margin-bottom" type="number" step="any" name="importe">
@@ -121,7 +121,7 @@ session_start();
 </form>
   </div>
 <div class="w3-container">
-<form method="post" action="resumen.php">
+<form method="post" action="resumen.php" target="_blank">
   <input class="w3-button w3-block w3-margin-top w3-margin-bottom w3-gray" type="submit" value="Ver mis movimientos">
 
 </div>
