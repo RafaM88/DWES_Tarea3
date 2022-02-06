@@ -209,7 +209,7 @@ $query2->bindParam(1,$row['nombre']);
     <div id="Starter" class="w3-container menu w3-padding-32 w3-white">
       
    <?php
-    $query3=$dbh->prepare("select * from size;");
+    $query3=$dbh->prepare("select * from tamanio;");
     $result3=$query3->execute();
     $result3=$query3->fetchAll(PDO::FETCH_ASSOC);
     foreach($result3 as $row){
