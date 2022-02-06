@@ -1,0 +1,10 @@
+<?php
+session_start();
+    if(!isset($_SESSION['nombre'])){
+        die(header("Location:index.php"));
+    }
+    if(isset($_COOKIE['cesta'])){
+    setcookie("cesta",$_COOKIE['cesta'],time()-60*60*24);
+    header("Location:realizarpedido.php");
+    }
+?>

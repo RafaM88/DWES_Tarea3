@@ -1,0 +1,9 @@
+<?php
+    if(isset($_COOKIE['cesta'])){
+        $obj=json_decode($_COOKIE['cesta']);
+        array_splice($obj,$_GET['number'],1);
+        setcookie("cesta",$_COOKIE['cesta'],time()-60*60*24);
+        setcookie("cesta",json_encode($obj),time()+60*60*24);
+    }
+    header("Location:realizarpedido.php");
+?>

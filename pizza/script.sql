@@ -60,19 +60,27 @@ insert into pizzas(nombre,ingredientes,precio) values ('pizza margarita','{salsa
 ('pizza carbonara','{nata,bacon,champiñones,mozzarella,orégano}',10),
 ('pizza andaluza','{salsa de tomate,jamón serrano,tomate natural,pimientos,mozzarella,orégano}',10.5);
 
-drop table if exists size;
-create table size(
+drop table if exists tamanio;
+create table tamanio(
 	nombre varchar(20),
 	descripcion varchar(50),
 	incremento integer,
 	constraint pk_size primary key (nombre)
 );
 
-insert into size(nombre,descripcion,incremento) values
+insert into tamanio(nombre,descripcion,incremento) values
 	('SOLITARIO','Para un comensal',-2),
 	('DUO','Para 2 comensales',-1),
 	('ESTÁNDAR','Para 4 comensales',0),
 	('BIG','Para 6 comensales',1),
 	('MONSTER','Para 10 comensales',3);
 
-select nombre,unnest(ingredientes)as ingredientes, precio from pizzas;
+drop table if exists pedido_usuario;
+create table pedido_usuario(
+	id integer,
+	pizza varchar(20) default 'pizza a medida',
+	ingredientes varchar(20)[],
+	tamaño integer,
+	precio numeric(5,2),
+	cantidad integer
+);

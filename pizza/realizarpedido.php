@@ -78,18 +78,78 @@ $query2->bindParam(1,$row['nombre']);
       $string = $string . $ingredientes['ingredientes'].", ";
     }
     $final= rtrim($string,", ");
-    echo $final;
+    echo $final." - ".$row['precio']." €";
     ?>
     </option><?php
     }
 ?>
 </select>
+
+<select class="w3-select w3-margin-top w3-margin-bottom w3-xxlarge" name="size">
+  <option value="" disabled selected>Elige un tamaño</option>
+  <?php
+
+$query=$dbh->prepare("select * from tamanio;");
+$result=$query->execute();
+$result=$query->fetchAll(PDO::FETCH_ASSOC);
+foreach($result as $row){
+    ?><option value="<?=$row['nombre'];?>"><?=$row['nombre'];?>-<?=$row['descripcion']." ".$row['incremento'];?> €</option>
+<?php
+}
+?>
+</select>
+<label class="w3-xxlarge">Cantidad (máximo 10)</label>
+<input class="w3-input w3-xxlarge" type="number" min="1" max="10" step="1" name="cantidad">
 <input class="w3-button w3-block w3-red w3-margin-top w3-margin-bottom w3-xxlarge w3-hover-green" type="submit" value="añadir a la cesta">
 </form>
+<p style="background-color:red">
+<div class="w3-gray w3-container w3-center">
+<?php
+if(!isset($_COOKIE['cesta'])){
+    ?>
+    
+        <h1 class="w3-center w3-xxxlarge w3-green"><b>Tu cesta está vacía</b></h1><?php
+    
+}else{
+    ?><h1 class="w3-center w3-xxxlarge w3-green"><b>Productos añadidos a la cesta</b></h1>
+   <?php
+   $total=0;
+   $cesta=json_decode($_COOKIE['cesta']);
+   for($i=0;$i<count($cesta);$i++){
+     ?>
+     <form method="GET" action="borrar.php?number=<?=$i;?>">
+    <h1><b><?=$cesta[$i][0];?></b>
+    <span class="w3-right w3-tag w3-dark-grey w3-round">Precio unitario <?=$cesta[$i][1];?> €</span></h1>
+    <p class="w3-xlarge">Tamaño: <b><?=$cesta[$i][2];?>(<?=$cesta[$i][4];?> €)</b></p>
+    <p class="w3-xlarge">Cantidad: <b><?=$cesta[$i][3];?></b></p>
+    <h1>
+    <span class="w3-tag w3-dark-grey w3-round">SUBTOTAL:<?php
+    $subtotal=((($cesta[$i][1])+($cesta[$i][4]))*($cesta[$i][3]));
+    $total=$total + $subtotal;
+    echo $subtotal;?> €</span></h1><br>
+    <input class="w3-red w3-xlarge w3-block w3-button w3-margin-bottom" value="Eliminar de la cesta" type="submit">
+    <?php
+       }
+   ?>
+ 
+  
+   
+   </div>
+   <hr>
+    </form>
+ <?php
+  }
+ 
 
+  
 
+  
+
+?>
+<h1><span class="w3-margin w3-xxxlarge w3-center w3-tag w3-dark-grey w3-round">TOTAL <?=$total?> €</span></h1>
+</div>
 <footer class="w3-center w3-black w3-padding-48 w3-xxlarge">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+  <p>Powered by <a href="https://github.com/RafaM88" title="W3.CSS" target="_blank" class="w3-hover-text-green">Rafa Montes</a></p>
 </footer>
 </body>
 </html>
