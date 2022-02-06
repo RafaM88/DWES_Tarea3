@@ -31,10 +31,7 @@
     <p>EJERCICIO 5 A- Pizzería Online</p>
   </a>
 
-  <a href="#../test/index.php" target="_blank" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fab fa-php w3-xxlarge"></i>
-    <p>EJERCICIO 5 B- Test de PHP</p>
-  </a>
+
 </nav>
 
 <!-- Navbar on small screens (Hidden on medium and large screens) -->
@@ -45,7 +42,7 @@
     <a href="../composer/index.php" target="_blank" class="w3-bar-item w3-button" style="width:16.6% !important"><i class="fa fa-file-code-o w3-xxlarge"></i></a>
     <a href="../balance/index.php" target="_blank" class="w3-bar-item w3-button" style="width:16.6% !important"><i class="fa fa-money w3-xxlarge"></i></a>
     <a href="../pizza/index.php" target="_blank" class="w3-bar-item w3-button" style="width:16.6% !important"><i class="fas fa-pizza-slice w3-xxlarge"></i></a>
-    <a href="../test/index.php" target="_blank" class="w3-bar-item w3-button" style="width:16.6% !important"><i class="fab fa-php w3-xxlarge"></i></a>
+  
   </div>
 </div>
 
