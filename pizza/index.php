@@ -1,13 +1,17 @@
 <?php
 
   session_start();
-  //$_SESSION['nombre'] = "Rafa";
+  
   require_once("connect_db.php");
+
+//Consultas
+
+$query_ingredientes = "select * from ingredientes order by ingrediente;";
 ?>
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Pizza Donatello</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -74,10 +78,34 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
         <img src="img/icono_chef.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
       </div>
 <!-- Login -->
-      <form class="w3-container" method="post" action="login.php">
+      <form class="w3-container" method="post" action="login.php" style="font-size:30px;" >
+      <?php
+      if(isset($_GET['errorLog'])){
+  switch($_GET['errorLog']){
+    case 1:
+    $error="Has dejado campos sin rellenar. Todos los campos son obligatorios";
+    break;
+
+    case 2:
+      $error="Usuario y/o contraseña incorrectos";
+      break;
+
+      default:
+      $error="Error desconocido";
+  }
+  ?>
+  <div class="w3-panel w3-red w3-display-container">
+        <span onclick="this.parentElement.style.display='none'"class="w3-button w3-large w3-display-topright">&times;</span>
+        <h3>Error</h3>
+        <p><?=$error?></p>
+    </div>
+    <script>document.getElementById('id01').style.display='block';</script>
+  <?php
+}
+    ?>
         <div class="w3-section">
           <label><b>Usuario</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Usuario" name="usuario" required>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Usuario" name="usuario" required="required" style="-input-placeholder background-color:red;">
           <label><b>Contraseña</b></label>
           <input class="w3-input w3-border" type="password" placeholder="contraseña" name="pass" required>
           <input class="w3-button w3-block w3-green w3-section w3-padding" type="submit" value="Iniciar Sesión">
@@ -87,7 +115,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
         </div>
       </form>
 
-      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey" style="font-size:30px;">
         <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancelar</button>
        
       </div>
@@ -121,65 +149,91 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
     </div>
 
     <div id="Pizza" class="w3-container menu w3-padding-32 w3-white">
-      <h1><b>Margarita</b> <span class="w3-right w3-tag w3-dark-grey w3-round">8,50 €</span></h1>
-      <p class="w3-text-grey">Tomate,mozzarella y orégano</p>
+     <?php
+     $nombre="";
+     $precio=0;
+         $query=$dbh->prepare("select nombre,ingredientes, precio from pizzas;");
+         $result=$query->execute();
+         $result=$query->fetchAll(PDO::FETCH_ASSOC);
+         foreach($result as $row){
+           
+     ?>
+      <h1><b><?=$row['nombre'];?></b> <span class="w3-right w3-tag w3-dark-grey w3-round"><?=$row['precio']?></span></h1>
+      <p class="w3-text-grey">
+        <?php
+
+$query2=$dbh->prepare("select unnest(ingredientes) as ingredientes from pizzas where nombre=?;");
+$query2->bindParam(1,$row['nombre']);
+    $result2=$query2->execute();
+    $result2=$query2->fetchAll(PDO::FETCH_ASSOC);
+    $string = "";
+    foreach($result2 as $ingredientes){
+      $string = $string . $ingredientes['ingredientes'].", ";
+    }
+    
+    
+    $final= rtrim($string,", ");
+    echo $final;
+    ?>
+    </p>
       <hr>
-   
-      <h1><b>Formaggio</b> <span class="w3-right w3-tag w3-dark-grey w3-round">15,50 €</span></h1>
-      <p class="w3-text-grey">Cuatro quesos (mozzarella, parmesano, roquefort, emmental)</p>
-      <hr>
+      <?php
+         }
+         ?>
       
-      <h1><b>Chicken</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$17.00</span></h1>
-      <p class="w3-text-grey">Fresh tomatoes, mozzarella, chicken, onions</p>
-      <hr>
-
-      <h1><b>Pineapple'o'clock</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$16.50</span></h1>
-      <p class="w3-text-grey">Fresh tomatoes, mozzarella, fresh pineapple, bacon, fresh basil</p>
-      <hr>
-
-      <h1><b>Meat Town</b> <span class="w3-tag w3-red w3-round">Hot!</span><span class="w3-right w3-tag w3-dark-grey w3-round">$20.00</span></h1>
-      <p class="w3-text-grey">Fresh tomatoes, mozzarella, hot pepporoni, hot sausage, beef, chicken</p>
-      <hr>
-
-      <h1><b>Parma</b> <span class="w3-tag w3-grey w3-round">New</span><span class="w3-right w3-tag w3-dark-grey w3-round">$21.50</span></h1>
-      <p class="w3-text-grey">Fresh tomatoes, mozzarella, parma, bacon, fresh arugula</p>
+  
     </div>
-
+  
     <div id="Pasta" class="w3-container menu w3-padding-32 w3-white">
-      <h1><b>Lasagna</b> <span class="w3-tag w3-grey w3-round">Popular</span> <span class="w3-right w3-tag w3-dark-grey w3-round">$13.50</span></h1>
-      <p class="w3-text-grey">Special sauce, mozzarella, parmesan, ground beef</p>
-      <hr>
-   
-      <h1><b>Ravioli</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$14.50</span></h1>
-      <p class="w3-text-grey">Ravioli filled with cheese</p>
-      <hr>
-      
-      <h1><b>Spaghetti Classica</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$11.00</span></h1>
-      <p class="w3-text-grey">Fresh tomatoes, onions, ground beef</p>
-      <hr>
 
-      <h1><b>Seafood pasta</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$25.50</span></h1>
-      <p class="w3-text-grey">Salmon, shrimp, lobster, garlic</p>
+    <?php
+      $stmt = $dbh -> prepare($query_ingredientes);
+      $stmt -> execute();
+      $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+      foreach($result as $row){
+        ?>
+        <h1><b><?=$row['ingrediente'];?></b> <span class="w3-tag w3-grey w3-round"><?=$row['tipo'];?></span> 
+        <span class="w3-right w3-tag w3-dark-grey w3-round"><?=$row['precio']?> €</span></h1>
+      <hr>
+      <?php
+      }
+
+    ?>
+     
     </div>
 
 
     <div id="Starter" class="w3-container menu w3-padding-32 w3-white">
-      <h1><b>Today's Soup</b> <span class="w3-tag w3-grey w3-round">Seasonal</span><span class="w3-right w3-tag w3-dark-grey w3-round">$5.50</span></h1>
-      <p class="w3-text-grey">Ask the waiter</p>
-      <hr>
-   
-      <h1><b>Bruschetta</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$8.50</span></h1>
-      <p class="w3-text-grey">Bread with pesto, tomatoes, onion, garlic</p>
-      <hr>
       
-      <h1><b>Garlic bread</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$9.50</span></h1>
-      <p class="w3-text-grey">Grilled ciabatta, garlic butter, onions</p>
-      <hr>
-      
-      <h1><b>Tomozzarella</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$10.50</span></h1>
-      <p class="w3-text-grey">Tomatoes and mozzarella</p>
-    </div><br>
+   <?php
+    $query3=$dbh->prepare("select * from size;");
+    $result3=$query3->execute();
+    $result3=$query3->fetchAll(PDO::FETCH_ASSOC);
+    foreach($result3 as $row){
+      ?>
+      <h1><b><?=$row['nombre'];?></b> <span class="w3-right w3-tag w3-dark-grey w3-round">
+        <?php
+          if($row['incremento']>0){
+            $incremento="+".$row['incremento']." €";
+          }else if($row['incremento']<0){
+            $incremento=$row['incremento']." €";
+          }else{
+            $incremento="incluído";
+          }
 
+          echo $incremento;
+            
+          
+        ?>
+      </span></h1>
+      <p class="w3-text-grey"><?=$row['descripcion'];?></p>
+      <hr>
+      <?php
+    }
+   ?>
+     
+      
+      
   </div>
 </div>
 
@@ -211,26 +265,69 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
 
 <!-- Image of location/map -->
 <img src="img/pizza.jpg" class="w3-image w3-greyscale" style="width:100%;">
+<?php
 
-<!-- Contact -->
+
+  
+  if(!isset($_SESSION['nombre'])){
+    ?>
+<!-- Registro -->
 <div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge">
   <div class="w3-content">
     <h1 class="w3-center w3-jumbo" style="margin-bottom:64px" id="myMap">REGÍSTRATE</h1>
-    <p><span class="w3-tag">FYI!</span> We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste.</p>
     <p class="w3-xxlarge"><strong>Regístrate</strong> para hacer pedidos online y estar al tanto de nuestras últimas novedades</p>
+    <?php
+    if(isset($_GET['error'])){
+  switch($_GET['error']){
+    case 1:
+    $error="Has dejado campos sin rellenar. Todos los campos son obligatorios";
+    break;
+  case 2:
+  $error="Las contraseñas no coinciden";
+  break;
+  
+    case 4:
+   $error="El formato de usuario no es correcto";
+      break;
+      case 5:
+        $error="El formato de nombre no es correcto";
+        break;
+        case 6:
+        $error="El formato de apellidos no es correcto";
+          break;
+          case 7:
+           $error="El formato de contraseña no es correcto";
+            break;
+    
+    case 8:
+      $error="Ya existe un usuario con el nombre introducido. Prueba uno diferente";
+      break;
+      default:
+    $error="error desconocido";
+  }
+  ?>
+  <div class="w3-panel w3-red w3-display-container">
+        <span onclick="this.parentElement.style.display='none'"class="w3-button w3-large w3-display-topright">&times;</span>
+        <h3>Error</h3>
+        <p><?=$error?></p>
+    </div>
+
+  <?php
+}
+?>
     <form action="register.php" method="post">
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Nombre de usuario (nickname)" required="required" name="usuario"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Nombre" required="required>" name="nombre"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Nombre" required="required>" name="apellidos"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="passwd" placeholder="Contraseña (mínimo 5 caracteres, letras a-z, A-z, números 0-9)" required="required>" name="pass1"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="passwd" placeholder="Repita su contraseña" required="required" name="pass2"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="tel" placeholder="Teléfono (sólo números de España)" pattern="^[6789]{1}[0-9]{8}$" required name="telefono"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="email" placeholder="correo electrónico" required name="correo"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="nickname (letras sin acento, números de 0 a 9 máximo 10 caracteres)" required="required" pattern="^[a-zA-Z0-9]{0,10}$" name="usuario"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Nombre (máximo 20 caracteres, solo letras y espacio)" required="required" pattern="^[a-zA-Z0-9ÁÉÍÓÚáéíóú ]{1,20}$" maxlength="20"  name="nombre"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Apellidos (máximo 30 caracteres, solo letras y espacio)" required="required" pattern="^[a-zA-Z0-9ÁÉÍÓÚáéíóú ]{1,30}$" maxlength="30"  name="apellidos"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="password" required="required" placeholder="Contraseña (mínimo 5 caracteres, máximo 10 caracteres. Letras sin acentuar y números 0-9)" maxlength="10" minlength="5" pattern="^[a-zA-Z0-9]{5,10}$"  name="pass1"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="password" required="required" placeholder="Repita su contraseña"  name="pass2"></p>
       <p><button class="w3-button w3-light-grey w3-block" type="submit">registrarse</button></p>
     </form>
   </div>
 </div>
-
+<?php
+  }
+  ?>
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-48 w3-xxlarge">
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
