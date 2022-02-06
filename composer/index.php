@@ -39,19 +39,19 @@ o Laravel, que es un framework del patrón MVC.
 <h3>¿Cómo instalamos nuestras dependencias en Composer y qué archivo se genera?</h3>
 <p>Para instalar nuestras dependencias, debemos crear un archivo llamado <b>composer.json</b> que contendrá la palabra reservada <b>require</b> y dentro contendrá el paquete o dependencia
 que queremos instalar y la versión. En el fragmento de código de abajo podemos observar un pequeño ejemplo.</p>
-<code>
-    <pre>
+
+<pre>
 {
-    "require": {
-        "monolog/monolog": "2.0.*"
-    }
+  "require": {
+    "monolog/monolog": "2.0.*"
+   }
 }
 </pre>
-</code>   
+   
 <p>Una vez tengamos elegidas las dependencias, tenemos que ejecutar el comando:</p>
 <code>
     <pre>
-    php composer.phar <span>install</span>
+php composer.phar <span>install</span>
 </pre>
 </code>
 <p>Tras esto, se nos creará un árbol de directorios con las dependencias solicitadas, además de un archivo <b>composer.lock</b>, que contendrá todas las dependencias que ha tenido que 
@@ -66,7 +66,7 @@ pues instalará exactamente las mismas dependencias que nos ha instalado a nosot
 <p>Para actualizar nuestras dependencias a la última versión, basta con ejecutar el siguiente comando:
 <code>
     <pre>
-    php composer.phar <span>update</span>
+php composer.phar <span>update</span>
 </pre>
 </code>
 
@@ -82,9 +82,9 @@ pues instalará exactamente las mismas dependencias que nos ha instalado a nosot
 
 <code>
     <pre>
-    require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
-    $log = new Monolog\Logger('name');
+$log = new Monolog\Logger('name');
 </pre>
 </code>
 </body>
