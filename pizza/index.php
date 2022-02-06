@@ -38,14 +38,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
     <a href="#menu" class="w3-bar-item w3-button w3-hide-small">MENÚ</a>
     <a href="#about" class="w3-bar-item w3-button w3-hide-small">NOSOTROS</a>
     <a href="#myMap" class="w3-bar-item w3-button w3-hide-small">REGISTRO</a>
+    
     <?php
     if(!isset($_SESSION['nombre'])){
       ?>
+      
     <span class="w3-bar-item w3-button w3-right" onclick="document.getElementById('id01').style.display='block'">ÁREA CLIENTE</span>
     <?php
     }else{
       ?>
-      <a href="logout.php" class="w3-bar-item w3-button w3-right">Cerrar sesión</a>
+      <a href="realizarpedido.php" class="w3-bar-item w3-button">REALIZAR PEDIDO</a>
+      <a href="logout.php" class="w3-bar-item w3-button w3-right" target="_blank">Cerrar sesión</a>
       <?php
     }
     ?>
